@@ -1,7 +1,7 @@
 #### candle学习记录
 * chapter2：训练第一个网络
 * chapter3: 逐步搭建语言模型
-* chapter4：ViT + ConvNext
+* chapter4：ViT + ConvNeXt
 
 ##### 参考来源
 * LLMs-from-scratch：https://github.com/rasbt/LLMs-from-scratch/
