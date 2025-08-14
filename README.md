@@ -2,6 +2,7 @@
 * chapter2：训练第一个网络
 * chapter3: 逐步搭建语言模型
 * chapter4：ViT + ConvNeXt
+* moe: 学习笔记链接：[https://jhqxxx.github.io/moe.html](https://jhqxxx.github.io/moe.html)
 
 ##### 参考来源
 * LLMs-from-scratch：https://github.com/rasbt/LLMs-from-scratch/
@@ -11,4 +12,4 @@
 * ViT: https://arxiv.org/pdf/2010.11929
 
 ##### 配套讲解视频
-* B站主页：https://space.bilibili.com/3546939448625894
+* B站主页：[https://space.bilibili.com/3546939448625894](https://space.bilibili.com/3546939448625894)
