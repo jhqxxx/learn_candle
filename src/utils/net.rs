@@ -1,4 +1,4 @@
-use candle_core::{Error, Result, Tensor};
+use candle_core::{Error, Result, Tensor, D, DType};
 use candle_nn::{Conv2d, Conv2dConfig, Module, VarBuilder, VarMap, conv2d};
 use plotters::prelude::*;
 
@@ -107,4 +107,29 @@ impl ResDWConv2d {
 
 pub trait CustomModule {
     fn forward(&self, x: &Tensor, train: bool) -> Result<Tensor>;
+}
+
+pub fn onehot(input: &Tensor, num_experts: usize) -> Result<Tensor> {
+    let mut shape = input.dims().to_vec();
+    shape.push(num_experts);
+    let expand_input = input.unsqueeze(D::Minus1)?.broadcast_as(shape)?;
+    let range = Tensor::arange(0u32, num_experts as u32, input.device())?.broadcast_as(expand_input.dims())?;
+    let onehot = expand_input.eq(&range)?;
+    Ok(onehot)
+}
+
+pub fn nonzero(input: &Tensor) -> Result<(Vec<u32>, Vec<u32>)> {
+    assert!(input.rank()==2, "input rank must be 2!");
+    let mut topk_ids = Vec::new();
+    let mut token_ids_all = Vec::new();
+    let topk = input.dim(0)?;
+    let input_vec = input.to_vec2::<u32>()?;
+    for i in 0..topk {
+        let vec = &input_vec[i];
+        let token_ids:Vec<u32> = vec.iter().enumerate().filter_map(|(idx, &val)| if val > 0 {Some(idx as u32)} else {None}).collect();
+        let token_len = token_ids.len();
+        topk_ids.extend_from_slice(&vec![i as u32; token_len]);
+        token_ids_all.extend_from_slice(&token_ids);
+    }
+    Ok((topk_ids, token_ids_all))
 }
