@@ -3,6 +3,7 @@ use crate::utils::net::{nonzero, onehot};
 use candle_core::{D, IndexOp, Result, Tensor};
 use candle_nn::{Linear, Module, VarBuilder, linear_no_bias, ops};
 
+#[allow(unused)]
 pub struct SparseMoeBlock {
     router: Linear,
     experts: Vec<FeedForward>,
@@ -10,6 +11,7 @@ pub struct SparseMoeBlock {
     num_experts_per_token: usize,
 }
 
+#[allow(unused)]
 impl SparseMoeBlock {
     pub fn new(
         vb: VarBuilder,
