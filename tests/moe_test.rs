@@ -4,6 +4,7 @@ use candle_core::{Device, Tensor};
 
 #[test]
 fn test_moe() {
+    //  cargo test test_moe -- --nocapture
     let device = Device::cuda_if_available(0).unwrap();
     let varmap = VarMap::new();
     let vb = VarBuilder::from_varmap(&varmap, candle_core::DType::F32, &device);

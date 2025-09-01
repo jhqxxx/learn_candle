@@ -1,4 +1,4 @@
-use candle_core::{Device, Error, Result, Tensor};
+use candle_core::{Device, Error, Result, Tensor, Var};
 
 mod chapter3;
 mod chapter4;
